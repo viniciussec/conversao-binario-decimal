@@ -1,65 +1,65 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { useState } from "react";
 
 export default function Home() {
+  const [binario, setBinario] = useState(null);
+  const [decimal, setDecimal] = useState(null);
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    // console.log(binario);
+    // console.log(decimal);
+
+    let dec = parseFloat(decimal);
+    let bin = "0.";
+
+    for (let i = 0; i < 50; i++) {
+      dec *= 2;
+      if (dec > 1) {
+        dec -= 1;
+        bin = bin + "1";
+      } else if (dec < 1) {
+        bin += "0";
+      } else {
+        bin += "1";
+        break;
+      }
+    }
+
+    setBinario(bin);
+    console.log(bin);
+  };
+
+  const binarioChange = (event) => {
+    setBinario(event.target.value);
+  };
+
+  const decimalChange = (event) => {
+    setDecimal(event.target.value);
+  };
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+    <div className="bg-gray-700 w-screen h-screen p-5 flex flex-col items-center">
+      <form
+        onSubmit={onSubmit}
+        className="bg-gray-700 p-5 flex flex-col items-center"
+      >
+        <h1 className="text-white p-5">Bem-vindo ao conversor</h1>
+        <input
+          value={decimal}
+          onChange={decimalChange}
+          placeholder="Decimal"
+          className="form-input m-5 p-1"
+          type="text"
+        />
+        <input
+          value={binario}
+          onChange={binarioChange}
+          placeholder="Binário"
+          className="form-input m-5 p-1"
+          type="text"
+        />
+        <button className="p-3 bg-red-700 rounded text-white">Converter</button>
+      </form>
     </div>
-  )
+  );
 }
