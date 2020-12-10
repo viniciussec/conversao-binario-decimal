@@ -6,9 +6,6 @@ const BinaryToDecimal = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-
-    // setBinario(bin);
-    // console.log(bin);
   };
 
   const binarioChange = (event) => {

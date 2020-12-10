@@ -1,11 +1,17 @@
+// ---------------------this
+const purgecss = [
+  "@fullhuman/postcss-purgecss",
+  {
+    content: ["./components/**/*.js", "./pages/**/*.js"],
+    defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
+  },
+];
+// ---------------------this
 module.exports = {
-  purge: ["./pages/**/*.js", "./components/**/*.js"],
-  darkMode: false, // or 'media' or 'class'
-  theme: {
-    extend: {},
-  },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
+  plugins: [
+    "postcss-import",
+    "tailwindcss",
+    "autoprefixer",
+    ...(process.env.NODE_ENV === "production" ? [purgecss] : []),
+  ],
 };
