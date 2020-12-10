@@ -1,13 +1,11 @@
 import { useState } from "react";
 
-export default function Home() {
+const DecimalToBinary = () => {
   const [binario, setBinario] = useState(null);
   const [decimal, setDecimal] = useState(null);
 
   const onSubmit = (event) => {
     event.preventDefault();
-    // console.log(binario);
-    // console.log(decimal);
 
     let dec = parseFloat(decimal);
     let bin = "0.";
@@ -38,12 +36,10 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-gray-700 w-screen h-screen p-5 flex flex-col items-center">
       <form
         onSubmit={onSubmit}
-        className="bg-gray-700 p-5 flex flex-col items-center"
+        className="p-5 flex flex-col items-center"
       >
-        <h1 className="text-white p-5">Bem-vindo ao conversor</h1>
         <input
           value={decimal}
           onChange={decimalChange}
@@ -60,6 +56,7 @@ export default function Home() {
         />
         <button className="p-3 bg-red-700 rounded text-white">Converter</button>
       </form>
-    </div>
   );
-}
+};
+
+export default DecimalToBinary;
